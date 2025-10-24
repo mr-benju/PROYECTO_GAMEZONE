@@ -68,6 +68,7 @@ dependencies {
     // --- ViewModel y LiveData (para MVVM) ---
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation(libs.play.services.analytics.impl)
 
     // --- Testing ---
     testImplementation(libs.junit)
@@ -79,4 +80,6 @@ dependencies {
     // --- Herramientas de depuración ---
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }

@@ -2,7 +2,7 @@ package com.example.gamezone.viewModel
 
 
 import androidx.lifecycle.ViewModel
-import com.example.gamezone.models.FakeDatabase
+import com.example.gamezone.data.FakeDatabase
 import com.example.gamezone.models.User
 
 class RegisterViewModel : ViewModel() {
