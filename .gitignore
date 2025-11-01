@@ -1,0 +1,41 @@
+# Kotlin
+*.class
+*.jar
+*.kotlin_module
+build/
+
+# Android
+*.apk
+*.ap_
+*.aab
+*.dex
+local.properties
+.gradle/
+/captures
+.externalNativeBuild
+.cxx
+
+# IntelliJ IDEA / Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Gradle
+.gradle
+/build
+
+# Local configuration file
+local.properties
+
+# Log Files
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Replit
+.replit
+replit.nix
