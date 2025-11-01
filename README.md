@@ -1,4 +1,4 @@
-# GameZone - Tienda de Videojuegos (App Android)
+    # GameZone - Tienda de Videojuegos (App Android)
 
 [![Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://android.com)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg)](https://kotlinlang.org)
