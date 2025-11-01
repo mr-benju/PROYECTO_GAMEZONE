@@ -44,3 +44,4 @@ Thumbs.db
 
 # Gradle wrapper
 gradle-home/
+*.zip
