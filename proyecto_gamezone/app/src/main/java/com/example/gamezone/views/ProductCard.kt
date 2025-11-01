@@ -23,7 +23,7 @@ fun ProductCard(product: Product, onAddToCart: (Product) -> Unit) {
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
             Image(
-                painter = rememberAsyncImagePainter(product.imageUrl),
+                painter = rememberAsyncImagePainter(product.imageRes),
                 contentDescription = product.name,
                 modifier = Modifier
                     .fillMaxWidth()

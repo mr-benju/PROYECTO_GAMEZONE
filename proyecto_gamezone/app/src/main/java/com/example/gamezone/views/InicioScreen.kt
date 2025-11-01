@@ -7,11 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gamezone.R
 
 @Composable
-fun InicioScreen(onLoginClick: () -> Unit, onRegisterClick: () -> Unit) {
+fun InicioScreen(onLoginClick: () -> Unit,
+                 onRegisterClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,3 +36,14 @@ fun InicioScreen(onLoginClick: () -> Unit, onRegisterClick: () -> Unit) {
         }
     }
 }
+
+// Visualizar, con parametros vacios
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewInicioScreen() {
+    InicioScreen(
+        onLoginClick = {},
+        onRegisterClick = {}
+    )
+}
+

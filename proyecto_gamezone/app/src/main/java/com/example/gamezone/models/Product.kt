@@ -5,6 +5,6 @@ data class Product(
     val name: String,
     val platform: String,
     val price: Double,
-    val imageUrl: String,
+    val imageRes: Int, // Para cargar los juegos
     val description: String
 )
