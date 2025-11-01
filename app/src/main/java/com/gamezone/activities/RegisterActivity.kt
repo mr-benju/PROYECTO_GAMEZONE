@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.gamezone.R
 import com.gamezone.data.RegistrationResult
 import com.gamezone.models.GameGenre
-import com.gamezone.utils.ValidationResult
-import com.gamezone.viewmodels.RegisterViewModel
+import com.gamezone.viewmodels.AndroidRegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
     
-    private val viewModel = RegisterViewModel()
+    private val viewModel: AndroidRegisterViewModel by viewModels()
     
     private lateinit var fullNameInput: EditText
     private lateinit var emailInput: EditText
@@ -47,29 +47,26 @@ class RegisterActivity : AppCompatActivity() {
     
     private fun setupValidation() {
         fullNameInput.addTextChangedListener(createTextWatcher { 
-            viewModel.fullName = it
-            validateField(fullNameInput, viewModel.validateFullName())
+            viewModel.updateFullName(it)
         })
         
         emailInput.addTextChangedListener(createTextWatcher { 
-            viewModel.email = it
-            validateField(emailInput, viewModel.validateEmail())
+            viewModel.updateEmail(it)
         })
         
         passwordInput.addTextChangedListener(createTextWatcher { 
-            viewModel.password = it
-            validateField(passwordInput, viewModel.validatePassword())
+            viewModel.updatePassword(it)
         })
         
         confirmPasswordInput.addTextChangedListener(createTextWatcher { 
-            viewModel.confirmPassword = it
-            validateField(confirmPasswordInput, viewModel.validateConfirmPassword())
+            viewModel.updateConfirmPassword(it)
         })
         
         phoneInput.addTextChangedListener(createTextWatcher { 
-            viewModel.phone = it
-            validateField(phoneInput, viewModel.validatePhone())
+            viewModel.updatePhone(it)
         })
+        
+        observeValidationErrors()
     }
     
     private fun createTextWatcher(onTextChanged: (String) -> Unit): TextWatcher {
@@ -82,10 +79,45 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
     
-    private fun validateField(editText: EditText, result: ValidationResult) {
+    private fun observeValidationErrors() {
+        viewModel.fullNameError.observe(this) { error ->
+            fullNameInput.error = error
+        }
+        
+        viewModel.emailError.observe(this) { error ->
+            emailInput.error = error
+        }
+        
+        viewModel.passwordError.observe(this) { error ->
+            passwordInput.error = error
+        }
+        
+        viewModel.confirmPasswordError.observe(this) { error ->
+            confirmPasswordInput.error = error
+        }
+        
+        viewModel.phoneError.observe(this) { error ->
+            phoneInput.error = error
+        }
+        
+        viewModel.registrationResult.observe(this) { result ->
+            handleRegistrationResult(result)
+        }
+    }
+    
+    private fun handleRegistrationResult(result: RegistrationResult) {
         when (result) {
-            is ValidationResult.Success -> editText.error = null
-            is ValidationResult.Error -> editText.error = result.message
+            is RegistrationResult.Success -> {
+                Toast.makeText(
+                    this,
+                    "¡Registro exitoso! Bienvenido ${result.user.fullName}",
+                    Toast.LENGTH_LONG
+                ).show()
+                finish()
+            }
+            is RegistrationResult.Error -> {
+                Toast.makeText(this, result.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
     
@@ -97,9 +129,9 @@ class RegisterActivity : AppCompatActivity() {
                 setPadding(16, 16, 16, 16)
                 setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
-                        viewModel.selectedGenres.add(genre)
+                        viewModel.addGenre(genre)
                     } else {
-                        viewModel.selectedGenres.remove(genre)
+                        viewModel.removeGenre(genre)
                     }
                 }
             }
@@ -110,28 +142,7 @@ class RegisterActivity : AppCompatActivity() {
     
     private fun setupRegisterButton() {
         registerButton.setOnClickListener {
-            if (viewModel.isFormValid()) {
-                when (val result = viewModel.registerUser()) {
-                    is RegistrationResult.Success -> {
-                        Toast.makeText(
-                            this,
-                            "¡Registro exitoso! Bienvenido ${result.user.fullName}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        finish()
-                    }
-                    is RegistrationResult.Error -> {
-                        Toast.makeText(this, result.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            } else {
-                val validations = viewModel.validateAllFields()
-                validations.forEach { (field, result) ->
-                    if (result is ValidationResult.Error) {
-                        Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+            viewModel.attemptRegistration()
         }
     }
 }

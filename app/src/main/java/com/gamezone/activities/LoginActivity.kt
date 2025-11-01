@@ -8,15 +8,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.gamezone.R
 import com.gamezone.data.LoginResult
-import com.gamezone.utils.ValidationResult
-import com.gamezone.viewmodels.LoginViewModel
+import com.gamezone.viewmodels.AndroidLoginViewModel
 
 class LoginActivity : AppCompatActivity() {
     
-    private val viewModel = LoginViewModel()
+    private val viewModel: AndroidLoginViewModel by viewModels()
     
     private lateinit var emailInput: EditText
     private lateinit var passwordInput: EditText
@@ -42,14 +42,14 @@ class LoginActivity : AppCompatActivity() {
     
     private fun setupValidation() {
         emailInput.addTextChangedListener(createTextWatcher { 
-            viewModel.email = it
-            validateField(emailInput, viewModel.validateEmail())
+            viewModel.updateEmail(it)
         })
         
         passwordInput.addTextChangedListener(createTextWatcher { 
-            viewModel.password = it
-            validateField(passwordInput, viewModel.validatePassword())
+            viewModel.updatePassword(it)
         })
+        
+        observeValidationErrors()
     }
     
     private fun createTextWatcher(onTextChanged: (String) -> Unit): TextWatcher {
@@ -62,38 +62,49 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     
-    private fun validateField(editText: EditText, result: ValidationResult) {
+    private fun observeValidationErrors() {
+        viewModel.emailError.observe(this) { error ->
+            emailInput.error = error
+        }
+        
+        viewModel.passwordError.observe(this) { error ->
+            passwordInput.error = error
+        }
+        
+        viewModel.loginResult.observe(this) { result ->
+            handleLoginResult(result)
+        }
+    }
+    
+    private fun handleLoginResult(result: LoginResult) {
         when (result) {
-            is ValidationResult.Success -> editText.error = null
-            is ValidationResult.Error -> editText.error = result.message
+            is LoginResult.Success -> {
+                Toast.makeText(
+                    this,
+                    "¡Bienvenido ${result.user.fullName}!",
+                    Toast.LENGTH_LONG
+                ).show()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("USER_NAME", result.user.fullName)
+                startActivity(intent)
+                finish()
+            }
+            is LoginResult.Error -> {
+                val message = when {
+                    result.message.contains("no encontrado", ignoreCase = true) ->
+                        "Usuario no encontrado. Verifica tu correo electrónico."
+                    result.message.contains("incorrecta", ignoreCase = true) ->
+                        "Contraseña incorrecta. Por favor intenta nuevamente."
+                    else -> result.message
+                }
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            }
         }
     }
     
     private fun setupLoginButton() {
         loginButton.setOnClickListener {
-            when (val result = viewModel.loginUser()) {
-                is LoginResult.Success -> {
-                    Toast.makeText(
-                        this,
-                        "¡Bienvenido ${result.user.fullName}!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("USER_NAME", result.user.fullName)
-                    startActivity(intent)
-                    finish()
-                }
-                is LoginResult.Error -> {
-                    val message = when {
-                        result.message.contains("no encontrado", ignoreCase = true) ->
-                            "Usuario no encontrado. Verifica tu correo electrónico."
-                        result.message.contains("incorrecta", ignoreCase = true) ->
-                            "Contraseña incorrecta. Por favor intenta nuevamente."
-                        else -> result.message
-                    }
-                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-                }
-            }
+            viewModel.attemptLogin()
         }
     }
     
