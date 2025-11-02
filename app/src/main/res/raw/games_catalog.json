@@ -1,0 +1,136 @@
+{
+  "games": [
+    {
+      "id": "1",
+      "title": "The Legend of Zelda: Tears of the Kingdom",
+      "description": "Una épica aventura en el reino de Hyrule con nuevas mecánicas y un mundo expansivo para explorar.",
+      "platform": "Nintendo Switch",
+      "price": 69.99,
+      "imageUrl": "zelda_totk",
+      "category": "Aventura",
+      "rating": 4.9,
+      "inStock": true
+    },
+    {
+      "id": "2",
+      "title": "Elden Ring",
+      "description": "Un RPG de acción desarrollado por FromSoftware en colaboración con George R.R. Martin.",
+      "platform": "PC, PlayStation, Xbox",
+      "price": 59.99,
+      "imageUrl": "elden_ring",
+      "category": "RPG",
+      "rating": 4.8,
+      "inStock": true
+    },
+    {
+      "id": "3",
+      "title": "Cyberpunk 2077",
+      "description": "Sumérgete en Night City, una megalópolis obsesionada con el poder, el glamur y la modificación corporal.",
+      "platform": "PC, PlayStation, Xbox",
+      "price": 49.99,
+      "imageUrl": "cyberpunk",
+      "category": "RPG",
+      "rating": 4.5,
+      "inStock": true
+    },
+    {
+      "id": "4",
+      "title": "God of War Ragnarök",
+      "description": "Kratos y Atreus se embarcan en una aventura épica mientras se acerca el Ragnarök.",
+      "platform": "PlayStation 4, PlayStation 5",
+      "price": 69.99,
+      "imageUrl": "god_of_war",
+      "category": "Acción",
+      "rating": 4.9,
+      "inStock": true
+    },
+    {
+      "id": "5",
+      "title": "Hogwarts Legacy",
+      "description": "Vive tu propia aventura en el mundo mágico de Harry Potter en el siglo XIX.",
+      "platform": "PC, PlayStation, Xbox, Switch",
+      "price": 59.99,
+      "imageUrl": "hogwarts",
+      "category": "RPG",
+      "rating": 4.6,
+      "inStock": true
+    },
+    {
+      "id": "6",
+      "title": "Spider-Man 2",
+      "description": "Balancea a través de Nueva York como Peter Parker y Miles Morales en esta secuela espectacular.",
+      "platform": "PlayStation 5",
+      "price": 69.99,
+      "imageUrl": "spiderman",
+      "category": "Acción",
+      "rating": 4.8,
+      "inStock": true
+    },
+    {
+      "id": "7",
+      "title": "Starfield",
+      "description": "Explora la inmensidad del espacio en el primer nuevo universo de Bethesda en 25 años.",
+      "platform": "PC, Xbox Series X/S",
+      "price": 69.99,
+      "imageUrl": "starfield",
+      "category": "RPG",
+      "rating": 4.4,
+      "inStock": true
+    },
+    {
+      "id": "8",
+      "title": "FIFA 24",
+      "description": "El simulador de fútbol más realista con licencias oficiales y nuevas mecánicas de juego.",
+      "platform": "PC, PlayStation, Xbox, Switch",
+      "price": 59.99,
+      "imageUrl": "fifa24",
+      "category": "Deportes",
+      "rating": 4.3,
+      "inStock": true
+    },
+    {
+      "id": "9",
+      "title": "Mario Kart 8 Deluxe",
+      "description": "Carreras frenéticas con tus personajes favoritos de Nintendo en circuitos clásicos y nuevos.",
+      "platform": "Nintendo Switch",
+      "price": 59.99,
+      "imageUrl": "mario_kart",
+      "category": "Carreras",
+      "rating": 4.9,
+      "inStock": true
+    },
+    {
+      "id": "10",
+      "title": "Resident Evil 4 Remake",
+      "description": "El clásico de survival horror reimaginado con gráficos modernos y jugabilidad mejorada.",
+      "platform": "PC, PlayStation, Xbox",
+      "price": 59.99,
+      "imageUrl": "re4_remake",
+      "category": "Terror",
+      "rating": 4.8,
+      "inStock": true
+    },
+    {
+      "id": "11",
+      "title": "Baldur's Gate 3",
+      "description": "Un RPG épico basado en Dungeons & Dragons con decisiones que importan y combate táctico.",
+      "platform": "PC, PlayStation 5",
+      "price": 59.99,
+      "imageUrl": "baldurs_gate",
+      "category": "RPG",
+      "rating": 4.9,
+      "inStock": true
+    },
+    {
+      "id": "12",
+      "title": "Call of Duty: Modern Warfare III",
+      "description": "Acción militar intensa con campaña cinematográfica y multijugador competitivo.",
+      "platform": "PC, PlayStation, Xbox",
+      "price": 69.99,
+      "imageUrl": "cod_mw3",
+      "category": "FPS",
+      "rating": 4.2,
+      "inStock": true
+    }
+  ]
+}
