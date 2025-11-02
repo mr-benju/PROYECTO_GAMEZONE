@@ -1,0 +1,29 @@
+#!/bin/bash
+
+echo "╔════════════════════════════════════════════════════════════╗"
+echo "║         GameZone - Aplicación Android                      ║"
+echo "╚════════════════════════════════════════════════════════════╝"
+echo ""
+echo "⚠️  IMPORTANTE: Esta es una aplicación Android nativa"
+echo ""
+echo "❌ NO puede ejecutarse en Replit porque:"
+echo "   • Requiere Android Runtime (ART)"
+echo "   • Necesita un emulador Android"
+echo "   • Replit no soporta emuladores Android"
+echo ""
+echo "✅ Para ejecutar esta aplicación:"
+echo ""
+echo "1. Descarga Android Studio:"
+echo "   https://developer.android.com/studio"
+echo ""
+echo "2. Abre este proyecto en Android Studio"
+echo ""
+echo "3. Configura un emulador Android o conecta un dispositivo"
+echo ""
+echo "4. Click en Run (▶️) para ejecutar"
+echo ""
+echo "📖 Más información en README.md"
+echo ""
+echo "═══════════════════════════════════════════════════════════"
+
+exit 0
