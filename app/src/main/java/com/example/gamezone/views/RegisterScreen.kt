@@ -9,8 +9,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -152,9 +150,9 @@ fun RegisterScreen(
                 },
                 trailingIcon = {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                        Icon(
-                            imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                            contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+                        Text(
+                            text = if (passwordVisible) "👁️" else "🙈",
+                            fontSize = 20.sp
                         )
                     }
                 },
@@ -189,9 +187,9 @@ fun RegisterScreen(
                 },
                 trailingIcon = {
                     IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
-                        Icon(
-                            imageVector = if (confirmPasswordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                            contentDescription = if (confirmPasswordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+                        Text(
+                            text = if (confirmPasswordVisible) "👁️" else "🙈",
+                            fontSize = 20.sp
                         )
                     }
                 },
@@ -228,7 +226,7 @@ fun RegisterScreen(
                         Alert.show(context, "La contraseña debe tener al menos 6 caracteres")
                         return@Button
                     }
-                    
+
                     isLoading = true
                     val msg = viewModel.registrar(nombre, correo, contrasena)
                     isLoading = false
@@ -241,12 +239,12 @@ fun RegisterScreen(
                     .fillMaxWidth()
                     .height(56.dp),
                 shape = RoundedCornerShape(12.dp),
-                enabled = !isLoading && 
-                         nombre.isNotBlank() && 
-                         correo.isNotBlank() && 
-                         contrasena.isNotBlank() && 
-                         confirmarContrasena.isNotBlank() &&
-                         contrasena == confirmarContrasena
+                enabled = !isLoading &&
+                        nombre.isNotBlank() &&
+                        correo.isNotBlank() &&
+                        contrasena.isNotBlank() &&
+                        confirmarContrasena.isNotBlank() &&
+                        contrasena == confirmarContrasena
             ) {
                 if (isLoading) {
                     CircularProgressIndicator(
