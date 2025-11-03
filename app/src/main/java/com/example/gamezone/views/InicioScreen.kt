@@ -1,7 +1,13 @@
 package com.example.gamezone.views
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -19,23 +25,40 @@ import com.example.gamezone.R
 @Composable
 fun InicioScreen(
     onLoginClick: () -> Unit,
-    onRegisterClick: () -> Unit
+    onRegisterClick: () -> Unit,
+    onCameraClick: () -> Unit
+
 ) {
+    // animación arriba/abajo
+    val infiniteTransition = rememberInfiniteTransition()
+    val offsetY by infiniteTransition.animateFloat(
+        initialValue = -20f,
+        targetValue = 20f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1200, easing = FastOutSlowInEasing)
+        )
+    )
+
+// toggle fondo
+    var fondoOscuro by remember { mutableStateOf(false) }
     val gradientColors = listOf(
         Color(0xFF6200EA),
         Color(0xFF3700B3),
         Color(0xFF03DAC5)
     )
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                brush = Brush.verticalGradient(
-                    colors = gradientColors
-                )
+                if (!fondoOscuro)
+                    Brush.verticalGradient(gradientColors)
+                else
+                    Brush.verticalGradient(listOf(Color.Black, Color.Black))
             )
-    ) {
+            .clickable { fondoOscuro = !fondoOscuro }
+    )
+
+    {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -63,6 +86,7 @@ fun InicioScreen(
                         modifier = Modifier
                             .size(180.dp)
                             .padding(16.dp)
+                            .offset(y = offsetY.dp)
                     )
                 }
             }
@@ -133,6 +157,9 @@ fun InicioScreen(
                 fontSize = 14.sp,
                 color = Color.White.copy(alpha = 0.7f)
             )
+            Button(onClick = onCameraClick) {
+                Text("Abrir cámara")
+            }
         }
     }
 }

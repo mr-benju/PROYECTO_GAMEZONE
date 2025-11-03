@@ -21,7 +21,8 @@ fun AppNavigation() {
         // Pantalla inicial
         "inicio" -> InicioScreen(
             onLoginClick = { currentScreen = "login" },
-            onRegisterClick = { currentScreen = "registro" }
+            onRegisterClick = { currentScreen = "registro" },
+            onCameraClick = { currentScreen = "camara" }
         )
 
         // Pantalla de login
@@ -49,5 +50,10 @@ fun AppNavigation() {
             productVM = productVM,
             onBack = { currentScreen = "home" }
         )
+
+        // Camara
+        "camara" -> CameraScreen(
+            onBackClick = { currentScreen = "inicio" }
+        ).camara()
     }
 }
