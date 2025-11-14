@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -16,6 +17,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    kapt {
+        correctErrorTypes = true
     }
 
     buildTypes {
@@ -53,6 +57,12 @@ android {
 }
 
 dependencies {
+    // Room (obligatorios)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+
+    // Room Compiler usando KAPT
+    kapt(libs.room.compiler)
     // Dependencias de la camara
     implementation("androidx.camera:camera-camera2:1.3.0")
     implementation("androidx.camera:camera-lifecycle:1.3.0")
